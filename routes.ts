@@ -29,20 +29,6 @@ export const authenticationRoute = [
 export const apiAuthPrefix = "/api/auth";
 
 /**
- * Only Admin are allowed
- * @type {string}
- */
-
-export const ADMIN_ONLY = "/admin";
-
-/**
- * Admin Emails
- * @type {string[]}
- */
-
-export const adminEmails = ["monerulmd5@gmail.com"];
-
-/**
  * The Default Redirect  Path for logging
  * @type {string}
  */

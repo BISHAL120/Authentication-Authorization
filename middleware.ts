@@ -7,8 +7,6 @@ import {
   apiAuthPrefix,
   authenticationRoute,
   publicRoute,
-  ADMIN_ONLY,
-  adminEmails,
 } from "@/routes";
 
 const { auth } = NextAuth(authConfig);
@@ -18,19 +16,11 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const adminOnly = nextUrl.pathname.startsWith(ADMIN_ONLY);
   const isAuthRoute = authenticationRoute.includes(nextUrl.pathname);
   const isPublicRoutes = publicRoute.includes(nextUrl.pathname);
 
   if (isApiAuthRoute) {
     return null;
-  }
-
-  if (adminOnly) {
-    const adminCheck = adminEmails.includes(req.auth?.user?.email as string);
-    if (!adminCheck) {
-      return Response.redirect(new URL("client", nextUrl));
-    }
   }
 
   if (isAuthRoute) {
@@ -47,7 +37,7 @@ export default auth((req) => {
     }
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
     return Response.redirect(
-      new URL(`/auth/login?${encodedCallbackUrl}`, nextUrl)
+      new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
     );
   }
 

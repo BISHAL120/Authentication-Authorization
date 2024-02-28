@@ -17,7 +17,7 @@ import { getTwoFactorConfirmationByUserId } from "@/Data/twoFactorConfirmation";
 
 export const login = async (
   values: z.infer<typeof LoginScheme>,
-  callBackUrl?: string
+  callbackUrl?: string | null
 ) => {
   const validateFields = LoginScheme.safeParse(values);
 
@@ -93,7 +93,7 @@ export const login = async (
     await signIn("credentials", {
       email,
       password,
-      redirectTo: callBackUrl || DEFAULT_LOGIN_REDIRECT,
+      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
     });
   } catch (error) {
     if (error instanceof AuthError) {
