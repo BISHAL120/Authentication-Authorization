@@ -14,6 +14,8 @@ export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
   });
 };
 
+/* Bishal */
+
 export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmationLink = `${domain}/auth/new-verification?token=${token}`;
   await resend.emails.send({
