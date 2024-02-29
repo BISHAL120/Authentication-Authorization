@@ -157,7 +157,7 @@ const SettingsPage = () => {
                 </>
               )}
 
-              {user.role === UserRole.ADMIN && (
+              {user?.role === UserRole.ADMIN && (
                 <FormField
                   control={form.control}
                   name="role"
